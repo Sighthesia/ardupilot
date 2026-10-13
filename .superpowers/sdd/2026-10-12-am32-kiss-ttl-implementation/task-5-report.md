@@ -14,7 +14,11 @@ Implemented the UluluDriveDayun board binding for the existing SCB3 UART.
 
 - `git diff --check`: passed.
 - Netlist check: `docs/ref/Netlist_2026-10-11.txt` confirms `A` at U1.75,
-  `B` at U1.74, shared ESC A/B/GND, and separate CANH/CANL through U12.
+  `B` at U1.74, shared ESC A/B/GND, separate CANH/CANL through U12, and
+  includes the U16 footprint and connected signals. The user confirmed that
+  the target assembly does not populate U16; this is a user/physical BOM
+  assembly-status confirmation, not evidence provided by the netlist text, and
+  must be verified against the actual board or BOM.
 - `./waf configure --board UluluDriveDayun`: blocked during Infineon setup.
   The checkout lacks
   `modules/infineon/TARGET_CYT4BB7/config/GeneratedSource`, causing
