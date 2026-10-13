@@ -6,6 +6,10 @@
 
 extern const AP_HAL::HAL& hal;
 
+const AP_Param::GroupInfo AP_AM32Kiss::var_info[] = {
+    AP_GROUPEND
+};
+
 AP_AM32Kiss::AP_AM32Kiss()
     :
 #if AP_AM32KISS_ENABLED && AP_AM32KISS_SERIAL_PROTOCOL_ENABLED

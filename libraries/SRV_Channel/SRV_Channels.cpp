@@ -199,6 +199,12 @@ const AP_Param::GroupInfo SRV_Channels::var_info[] = {
     AP_SUBGROUPINFO(fetteconwire, "_FTW_",  25, SRV_Channels, AP_FETtecOneWire),
 #endif
 
+#if AP_AM32KISS_ENABLED
+    // @Group: _AM32_
+    // @Path: ../AP_AM32Kiss/AP_AM32Kiss.cpp
+    AP_SUBGROUPINFO(am32kiss, "_AM32_",  45, SRV_Channels, AP_AM32Kiss),
+#endif
+
     // @Param: _DSHOT_RATE
     // @DisplayName: Servo DShot output rate
     // @Description: DShot output rate for all outputs as a multiple of the loop rate. 0 sets the output rate to be fixed at 1Khz for low loop rates. This value should never be set below 500Hz.
@@ -486,6 +492,10 @@ void SRV_Channels::cork()
 void SRV_Channels::push()
 {
     hal.rcout->push();
+
+#if AP_AM32KISS_ENABLED
+    am32kiss.update();
+#endif
 
 #if AP_VOLZ_ENABLED
     // give volz library a chance to update

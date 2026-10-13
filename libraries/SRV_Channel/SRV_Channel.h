@@ -22,6 +22,7 @@
 #include <AP_SBusOut/AP_SBusOut.h>
 #include <AP_BLHeli/AP_BLHeli.h>
 #include <AP_FETtecOneWire/AP_FETtecOneWire.h>
+#include <AP_AM32Kiss/AP_AM32Kiss.h>
 
 #include "SRV_Channel_config.h"
 
@@ -663,6 +664,10 @@ private:
 #if AP_FETTEC_ONEWIRE_ENABLED
     AP_FETtecOneWire fetteconwire;
 #endif  // AP_FETTEC_ONEWIRE_ENABLED
+
+#if AP_AM32KISS_ENABLED
+    AP_AM32Kiss am32kiss;
+#endif
 
     // mask of disabled channels
     static uint32_t disabled_mask;

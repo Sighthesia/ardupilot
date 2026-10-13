@@ -7,7 +7,6 @@
 #define AP_AM32KISS_ENABLED (CONFIG_HAL_BOARD == HAL_BOARD_INFINEON)
 #endif
 
-// Task 4 will enable this after registering SerialProtocol_AM32Kiss.
 #ifndef AP_AM32KISS_SERIAL_PROTOCOL_ENABLED
-#define AP_AM32KISS_SERIAL_PROTOCOL_ENABLED 0
+#define AP_AM32KISS_SERIAL_PROTOCOL_ENABLED 1
 #endif

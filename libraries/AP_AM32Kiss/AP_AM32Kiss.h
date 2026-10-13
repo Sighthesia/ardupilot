@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AP_HAL/AP_HAL.h>
+#include <AP_Param/AP_Param.h>
 
 #include "AP_AM32Kiss_config.h"
 
@@ -14,6 +15,8 @@ public:
     AP_AM32Kiss();
 
     CLASS_NO_COPY(AP_AM32Kiss);
+
+    static const struct AP_Param::GroupInfo var_info[];
 
     /// Periodically called from SRV_Channels::push().
     void update();
