@@ -4,6 +4,8 @@
     "MCU"   : "CYT4BB7CXE",
 
     "HAL_SERIAL_USB" : "HAL_SERIAL_0",
+    "DEFAULT_SERIAL3_PROTOCOL" : "SerialProtocol_AM32Kiss",
+    "DEFAULT_SERIAL3_BAUD" : 115200,
     "UART" : [
         [
             {
