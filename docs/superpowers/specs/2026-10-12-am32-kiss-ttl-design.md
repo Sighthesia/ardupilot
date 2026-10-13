@@ -109,16 +109,17 @@ compatibility, but no response is expected or required.
 
 ### Infineon board definition
 
-Add a dedicated UART entry to
-`libraries/AP_HAL_Infineon/hwdef/UluluDriveDayun/hwdef.dat` only after mapping
-package pins `U1.75/U1.74` to the CYT4BB7 GPIO/HSIOM names. The entry must have:
+The netlist review confirmed that the ESC bus reuses the existing UART id 3
+entry in `libraries/AP_HAL_Infineon/hwdef/UluluDriveDayun/hwdef.dat`: SCB3,
+`P13.1/U1.75` for TX, `P13.0/U1.74` for RX, and the existing DMA pair
+23/22. No dedicated UART entry, new SCB, or new DMA allocation is added. The
+existing entry is selected for AM32 KISS by the board defaults and must retain:
 
-- a unique SCB not used by the existing UART/I2C/SPI entries;
 - the confirmed `A` TX and `B` RX pins, or the confirmed electrical direction
   if the board's wiring labels use the inverse nomenclature;
-- unique RX/TX DMA channels and triggers;
+- the existing unique RX/TX DMA channels and triggers;
 - a default baud rate of 115200;
-- an explicit comment that this UART is direct TTL and does not use `U16`.
+- explicit documentation that this UART is direct TTL and does not use `U16`.
 
 The generator and generated board definitions must remain compatible with
 boards that do not define this UART. No CAN definition is added for this

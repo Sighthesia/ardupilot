@@ -30,10 +30,9 @@ TEST(AM32Kiss, packs_six_slots_and_crc)
 
 TEST(AM32Kiss, crc8_vectors)
 {
-    const uint8_t empty[] {};
     const uint8_t vector[] {0x0F, 1, 2, 3, 4, 5, 6, 0, 0xFF, 0xFF};
 
-    EXPECT_EQ(AP_AM32Kiss::crc8(empty, 0), 0);
+    EXPECT_EQ(AP_AM32Kiss::crc8(nullptr, 0), 0);
     EXPECT_EQ(AP_AM32Kiss::crc8(vector, sizeof(vector)), 0x76);
 }
 

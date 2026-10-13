@@ -64,10 +64,22 @@ void AP_AM32Kiss::init_uart()
         return;
     }
 
+    const uint32_t baudrate = serial_manager.find_baudrate(AP_SerialManager::SerialProtocol_AM32Kiss, 0);
+    _uart->begin(baudrate == 0 ? DEFAULT_BAUDRATE : baudrate,
+                 AP_SERIALMANAGER_AM32KISS_BUFSIZE_RX,
+                 AP_SERIALMANAGER_AM32KISS_BUFSIZE_TX);
     _uart->set_flow_control(AP_HAL::UARTDriver::FLOW_CONTROL_DISABLE);
 
-    const uint32_t baudrate = serial_manager.find_baudrate(AP_SerialManager::SerialProtocol_AM32Kiss, 0);
-    _uart->begin(baudrate == 0 ? DEFAULT_BAUDRATE : baudrate, 16, 64);
+    // Prevent the same physical outputs from also being driven as PWM.
+    // Aggregate the physical channel mask for the six logical motor
+    // functions and mark them digital exactly once at UART init.
+    uint32_t motor_mask = 0;
+    for (uint8_t i = 0; i < SLOT_COUNT; i++) {
+        motor_mask |= SRV_Channels::get_output_channel_mask(SRV_Channels::get_motor_function(i));
+    }
+    if (motor_mask != 0) {
+        SRV_Channels::set_digital_outputs(motor_mask, 0);
+    }
 }
 #endif
 
